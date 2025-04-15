@@ -2496,45 +2496,7 @@ footer {
      background: #c0392b;
     transform: translateY(-2px);
 }
-.tour-ai {
-    margin-top: 30px;
-}
 
-.ai-assistant {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.ai-header {
-    background: #333;
-    color: white;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.ai-messages {
-    height: 200px;
-    overflow-y: auto;
-    padding: 15px;
-    background: #f5f5f5;
-}
-
-.ai-input {
-    display: flex;
-    padding: 10px;
-    background: white;
-    border-top: 1px solid #ddd;
-}
-
-.ai-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 .tour-images {
     flex: 1;
     overflow: hidden;
