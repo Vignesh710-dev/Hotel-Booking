@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+        <!-- ... existing head content ... -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muvi - Luxury Hotel Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h4>MUVI Assistant</h4>
+            <button class="chatbot-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="chatbot-message bot">
+                <p>Hello! I'm MUVI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Ask me anything about bookings..." class="chatbot-text">
+            <button class="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button class="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </button>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="logo-text">MUVI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rooms">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ai room recommendation">AI Room Recommendation</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3">
+                    <a href="#review" class="btn btn-danger">Reviews</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-aos="fade-up">Experience Luxury Redefined</h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Where timeless elegance meets modern sophistication</p>
+                <a href="#rooms" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="200">
+                    Explore Our Rooms
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ABOUT US</h2>
+                <p class="section-subtitle">Discover Our Story</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-highlight">
+                        <i class="fas fa-crown"></i>
+                        <h3>Luxury Redefined</h3>
+                        <p>Welcome to MUVI, where luxury meets comfort. Founded in 2020, our hotel combines world-class amenities with the warmth of personalized service.</p>
+                    </div>
+                    <div class="about-highlight">
+                        <i class="fas fa-heart"></i>
+                        <h3>Our Mission</h3>
+                        <p>We create unforgettable experiences for our guests through exceptional service and attention to detail.</p>
+                    </div>
+                    <div class="about-highlight">
+                        <i class="fas fa-star"></i>
+                        <h3>Excellence</h3>
+                        <p>Every detail has been carefully designed to ensure your stay exceeds expectations.</p>
+                    </div>
+                    <a href="about.html" class="btn btn-primary">
+                        LEARN MORE
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="about-image">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500" alt="Hotel Pool">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+    <!-- ... existing rooms section ... -->
+
+<section id="ai room recommendation" class="ai-recommendation">
+    <div class="container">
+        <h2>AI Room Recommendation</h2>
+        <p class="text-center" style="font-size: 18px;">Answer a few questions to get personalized room suggestions</p>
+        
+        <div class="recommendation-form">
+            <div class="form-step active" data-step="1">
+                <h3>What's your budget per night?</h3>
+                <div class="budget-options">
+                    <button class="budget-option" data-budget="150">Under ₹5,000</button>
+                    <button class="budget-option" data-budget="250">₹5,000 - ₹10,000</button>
+                    <button class="budget-option" data-budget="350">₹10,000+</button>
+                </div>
+            </div>
+            
+            <div class="form-step" data-step="2">
+                <h3>What amenities are important to you?</h3>
+                <div class="amenity-options">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <button class="btn btn-primary next-step">Next</button>
+            </div>
+            
+            <div class="form-step" data-step="3">
+                <h3>Your Recommended Rooms</h3>
+                <div class="recommended-rooms">
+                    <!-- Results will be displayed here -->
+                </div>
+                <button class="btn btn-primary restart">Start Over</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ... rest of your existing code ... -->
+
+    <section id="rooms" class="rooms-section">
+        <h2>OUR ROOMS</h2>
+        <div id="rooms-container" class="rooms-grid"></div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <h2>GALLERY</h2>
+        <div class="gallery-grid">
+            <!-- Row 1 -->
+            <div class="gallery-item wide">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500" alt="Hotel Lobby">
+                <div class="gallery-overlay">
+                    <h3>Luxury Lobby</h3>
+                    <p>Our elegant reception area</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=500" alt="Hotel Pool">
+                <div class="gallery-overlay">
+                    <h3>Infinity Pool</h3>
+                    <p>Stunning views while swimming</p>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500" alt="Deluxe Room">
+                <div class="gallery-overlay">
+                    <h3>Deluxe Room</h3>
+                    <p>Premium comfort</p>
+                </div>
+            </div>
+            <div class="gallery-item tall">
+                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=500" alt="Restaurant">
+                <div class="gallery-overlay">
+                    <h3>Fine Dining</h3>
+                    <p>Gourmet experience</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/9e/37/13/9e3713a2136a05bd71fe58e13206c8b4.jpg" alt="Spa Area">
+                <div class="gallery-overlay">
+                    <h3>Spa Retreat</h3>
+                    <p>Ultimate relaxation</p>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/e7/d0/98/e7d0984291b6f637409154acac4aedbd.jpg" alt="Executive Suite">
+                <div class="gallery-overlay">
+                    <h3>Starwin Residency</h3>
+                    <p>Business class</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/52/4b/ab/524bab0b573f8d1bcaf1f41c44e005e0.jpg" alt="Executive Suite">
+                <div class="gallery-overlay">
+                    <h3>Hotel Grish Park</h3>
+                    <p>Business class</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/f6/bf/2e/f6bf2ead8546606c5da8094f461b7299.jpg" alt="Executive Suite">
+                <div class="gallery-overlay">
+                    <h3>SSK Green Place</h3>
+                    <p>Business class</p>
+                </div>
+            </div>
+
+
+            <div class="gallery-item wide">
+                <img src="https://i.pinimg.com/736x/e5/45/5f/e5455ff7da2863a8286f452969055f57.jpg" alt="Gym Facility">
+                <div class="gallery-overlay">
+                    <h3>Fitness Center</h3>
+                    <p>State-of-the-art equipment</p>
+                </div>
+            </div>
+
+    </section>
+
+    <section id="blog" class="blog-section">
+        <h2>BLOG</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500" alt="Blog Image">
+                <h3>Best Rooms</h3>
+                <p>Discover our most luxurious accommodations with stunning views and premium amenities.</p>
+                <a href="blog-detail.html" class="btn read-more-btn" data-blog-id="1">READ MORE</a>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=500" alt="Blog Image">
+                <h3>Best Resorts</h3>
+                <p>Explore our partner resorts offering exclusive experiences for KETO guests.</p>
+                <a href="blog-detail.html" class="btn read-more-btn" data-blog-id="2">READ MORE</a>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500" alt="Blog Image">
+                <h3>Best Rooms</h3>
+                <p>Our newly renovated suites combine modern luxury with classic elegance.</p>
+                <a href="blog-detail.html" class="btn read-more-btn" data-blog-id="3">READ MORE</a>
+            </div>
+        </div>
+    </section>
+
+   <div class="container">
+    <h2 class="text-center mb-4">CONTACT US</h2>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3>Opening Hours</h3>
+                    <p>24/7</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <div class="icon-container">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div>
+                    <h3>Instagram</h3>
+                    <p><a href="https://instagram.com/fullstack_dev_vicky" target="_blank">@fullstack_dev_vicky</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <i class="fab fa-facebook"></i>
+                <div>
+                    <h3>Facebook</h3>
+                    <p><a href="https://facebook.com/muvi.hotel" target="_blank">Muvi Hotel</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <i class="fab fa-linkedin"></i>
+                <div>
+                    <h3>LinkedIn</h3>
+                    <p><a href="https://linkedin.com/company/muvi-hotel" target="_blank">Muvi Hotel</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <i class="fab fa-twitter"></i>
+                <div>
+                    <h3>Twitter</h3>
+                    <p><a href="https://twitter.com/muvi_hotel" target="_blank">@muvi_hotel</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div class="info-card">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <h3>Whatsapp</h3>
+                    <p><a href="https://whatsapp.com/9080700642" target="_blank">9080700642</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+           <div class="container">
+            <div class="row">  
+            <div class="contact-form-container">
+                <div class="form-header">
+                    
+                    <h3>Get In Touch</h3>
+                    <p>We'd love to hear from you! Fill out the form below and we'll get back to you soon.</p>
+                </div>
+                <form id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group floating-label">
+                            <input type="text" id="contact-name" required>
+                            <label for="contact-name">Your Name</label>
+                        </div>
+                        <div class="form-group floating-label">
+                            <input type="email" id="contact-email" required>
+                            <label for="contact-email">Your Email</label>
+                        </div>
+                    </div>
+                    <div class="form-group floating-label">
+                        <input type="tel" id="contact-phone" required>
+                        <label for="contact-phone">Phone Number</label>
+                    </div>
+                    <div class="form-group floating-label">
+                        <textarea id="contact-message" required></textarea>
+                        <label for="contact-message">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn">
+                        <span>SEND MESSAGE</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>    
+        </div>
+            <div class="container mt-3 shadow mb-3">
+                <div class="row">
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.3752953390384!2d78.82884!3d9.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00ab9c48873623%3A0x9913e45c2c1ec508!2sWest%20St%2C%20Pudukottai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1625124128045!5m2!1sen!2sin" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="booking-form" class="booking-section hidden">
+        <form id="booking-form">
+            <div class="form-row">
+                <div class="form-group floating-label">
+                    <input type="text" id="booking-name" required>
+                    <label for="booking-name">Full Name</label>
+                </div>
+                <div class="form-group floating-label">
+                    <input type="email" id="booking-email" required>
+                    <label for="booking-email">Email</label>
+                </div>
+            </div>
+            <div class="form-group floating-label">
+                <input type="tel" id="booking-phone" required>
+                <label for="booking-phone">Phone Number</label>
+            </div>
+            <div class="form-group floating-label">
+                <input type="date" id="check-in" required>
+                <label for="check-in">Check-in Date</label>
+            </div>
+            <div class="form-group floating-label">
+                <input type="date" id="check-out" required>
+                <label for="check-out">Check-out Date</label>
+            </div>
+            <div class="form-group floating-label">
+                <select id="room-type" required>
+                    <option value="">Select Room Type</option>
+                    <option value="deluxe">Deluxe Room</option>
+                    <option value="executive">Executive Suite</option>
+                    <option value="presidential">Presidential Suite</option>
+                </select>
+            </div>
+            <div class="form-group floating-label">
+                <textarea id="special-requests"></textarea>
+                <label for="special-requests">Special Requests</label>
+            </div>
+            <button type="submit" class="btn confirm-booking">
+                <span>CONFIRM BOOKING</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </section>
+
+    <section id="confirmation" class="confirmation-section hidden">
+        <!-- Confirmation will be filled by JavaScript -->
+    </section>
+<!-- Add this before the contact section -->
+<section id="reviews" class="reviews-section">
+    <h2>WHAT OUR GUESTS SAY</h2>
+    <div class="reviews-container">
+        <div class="review-card">
+            <div class="review-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p class="review-text">"Absolutely stunning hotel with exceptional service. The rooms were spacious and the amenities were top-notch!"</p>
+            <div class="review-author">
+                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                <div>
+                    <h4>AGNI ADVIK</h4>
+                    <p>Business Traveler</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="review-text">"The perfect getaway! The staff went above and beyond to make our anniversary special."</p>
+            <div class="review-author">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Brown">
+                <div>
+                    <h4>MUNEESWARI</h4>
+                    <p>Couple</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p class="review-text">"Best hotel experience ever! The kids loved the pool and we enjoyed the spa treatments."</p>
+            <div class="review-author">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Davis">
+                <div>
+                    <h4>VIGNESH</h4>
+                    <p>Family</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="add-review">
+        <h3>LEAVE YOUR REVIEW</h3>
+        <form id="comment-form">
+            <div class="form-group">
+                <input type="text" id="review-name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="review-email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea id="review-text" placeholder="Your Review" required></textarea>
+            </div>
+            <div class="form-group">
+                <div class="rating-stars">
+                    <span>Rating:</span>
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn">POST COMMENT</button>
+        </form>
+    </div>
+</section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <h2>MUVI</h2>
+                    <p>Luxury Hotel & Resorts</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#rooms">Rooms</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 45/2 West Street, Pudukottai, Kmauthi</p>
+                    <p><i class="fas fa-phone"></i> +91 9080700642</p>
+                    <p><i class="fas fa-envelope"></i> vigneshpk710@gmail.com</p>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for special offers and updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MUVI Luxury Hotel. All Rights Reserved. Designed by Vignesh Dev Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html>
+
