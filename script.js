@@ -885,7 +885,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
     }
 });
-document.getElementById('booking-form').addEventListener('submit', function(e) {
+document.getElementById('booking-form').addEventListener('submit',async function(e) {
     e.preventDefault();
     
     // Get booking details
@@ -898,26 +898,264 @@ document.getElementById('booking-form').addEventListener('submit', function(e) {
         roomType: document.getElementById('room-type').value,
         requests: document.getElementById('special-requests').value
     };
+   try{
 
-    // Send booking to server
+    const response=await
     fetch('/api/bookings', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(bookingDetails)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.success) {
-            alert('Booking confirmed! Check your email for details.');
-            this.reset();
-        } else {
-            alert('Booking failed. Please try again.');
+        body: JSON.stringify(bookingData)
+    });
+    const result = await response.json();
+        
+    if (result.success) {
+        Swal.fire({
+            title: 'Booking Confirmed!',
+            text: result.message,
+            icon: 'success',
+            confirmButtonText: 'Great!'
+        });
+    } else {
+        Swal.fire({
+            title: 'Error!',
+            text: result.message,
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
+    }
+} catch (error) {
+    Swal.fire({
+        title: 'Error!',
+        text: 'Failed to process booking. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+}
+});
+// For successful booking
+document.getElementById('booking-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Booking Confirmed!',
+        text: 'Your room has been successfully booked',
+        icon: 'success',
+        confirmButtonText: 'Great!'
+    });
+});
+
+// For contact form
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Message Sent!',
+        text: 'We will get back to you soon',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
+});
+
+// For error cases
+function showError(message) {
+    Swal.fire({
+        title: 'Error!',
+        text: message,
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+    });
+}
+document.getElementById('comment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Thank You!',
+        text: 'Your review has been submitted',
+        icon: 'success',
+        confirmButtonText: 'Close'
+    });
+});
+document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Subscribed!',
+        text: 'You will receive our latest offers',
+        icon: 'success',
+        confirmButtonText: 'Awesome!'
+    });
+});
+// Virtual Tour Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize 360° viewer (you'll need to implement this or use a library)
+    const tourViewer = document.getElementById('tour-viewer');
+    
+    // Room data
+    const rooms = [
+        
+        
+        {
+            id: 2,
+            name: "Executive Suite",
+            image: "https://i.pinimg.com/736x/e7/d0/98/e7d0984291b6f637409154acac4aedbd.jpg",
+            description: "Luxurious suite with separate living area",
+            price: 8000,
+            amenities: ["42\" Smart TV", "Separate living area", "Premium toiletries", "24/7 room service"],
+            size: "500 sq ft"
+        },
+        {
+            id: 3,
+            name: "Presidential Suite",
+            image: "https://i.pinimg.com/736x/52/4b/ab/524bab0b573f8d1bcaf1f41c44e005e0.jpg",
+            description: "Ultimate luxury with premium services",
+            price: 12000,
+            amenities: ["55\" Smart TV", "Private balcony", "Jacuzzi", "Personal butler service"],
+            size: "800 sq ft"
+        },
+        {
+            id: 3,
+            name: "Presidential Suite",
+            image: "https://i.pinimg.com/736x/52/4b/ab/524bab0b573f8d1bcaf1f41c44e005e0.jpg",
+            description: "Ultimate luxury with premium services",
+            price: 12000,
+            amenities: ["55\" Smart TV", "Private balcony", "Jacuzzi", "Personal butler service"],
+            size: "800 sq ft"
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
+    ];
+    
+
+    let currentRoom = 'deluxe';
+
+    // Room selection
+    document.getElementById('room-selector').addEventListener('change', (e) => {
+        currentRoom = e.target.value;
+        loadRoomTour(currentRoom);
+    });
+
+    // Navigation buttons
+    document.getElementById('prev-room').addEventListener('click', () => {
+        const options = document.getElementById('room-selector').options;
+        const currentIndex = Array.from(options).findIndex(opt => opt.value === currentRoom);
+        if (currentIndex > 0) {
+            document.getElementById('room-selector').value = options[currentIndex - 1].value;
+            currentRoom = options[currentIndex - 1].value;
+            loadRoomTour(currentRoom);
+        }
+    });
+
+    document.getElementById('next-room').addEventListener('click', () => {
+        const options = document.getElementById('room-selector').options;
+        const currentIndex = Array.from(options).findIndex(opt => opt.value === currentRoom);
+        if (currentIndex < options.length - 1) {
+            document.getElementById('room-selector').value = options[currentIndex + 1].value;
+            currentRoom = options[currentIndex + 1].value;
+            loadRoomTour(currentRoom);
+        }
+    });
+
+    // AI Assistant
+    document.getElementById('ask-tour').addEventListener('click', askQuestion);
+    document.getElementById('tour-question').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') askQuestion();
+    });
+
+    function loadRoomTour(roomType) {
+        // In a real implementation, you would load the 360° images here
+        const room = rooms.find(r => r.name.toLowerCase().includes(roomType));
+    if (!room) return;
+    
+    document.getElementById('tour-room-image').src = room.image;
+    document.getElementById('tour-room-name').textContent = room.name;
+    document.getElementById('tour-room-desc').textContent = room.description;
+    
+    const featuresContainer = document.getElementById('tour-room-features');
+    featuresContainer.innerHTML = room.amenities.map(amenity => `
+        <div class="feature">
+            <i class="fas fa-${getAmenityIcon(amenity)}"></i>
+            <span>${amenity}</span>
+        </div>
+    `).join('');
+       
+    }
+    // Call this on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadRoomTour('deluxe');
+
+    function askQuestion() {
+        const question = document.getElementById('tour-question').value.trim();
+        if (!question) return;
+
+        const messages = document.getElementById('tour-messages');
+        const userMessage = document.createElement('div');
+        userMessage.className = 'ai-message user';
+        userMessage.innerHTML = `<p>${question}</p>`;
+        messages.appendChild(userMessage);
+
+        // Simulate AI response (in a real app, you would call an API)
+        setTimeout(() => {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'ai-message bot';
+            
+            let response = "I'm sorry, I couldn't understand your question.";
+            const room = rooms[currentRoom];
+            
+            if (question.toLowerCase().includes('feature') || question.toLowerCase().includes('amenit')) {
+                response = `This ${currentRoom} room includes: ${room.features.join(', ')}.`;
+            } else if (question.toLowerCase().includes('size') || question.toLowerCase().includes('square')) {
+                response = `The ${currentRoom} room is approximately ${getRoomSize(currentRoom)} square feet.`;
+            } else if (question.toLowerCase().includes('price') || question.toLowerCase().includes('cost')) {
+                response = `The ${currentRoom} room starts at ₹${getRoomPrice(currentRoom)} per night.`;
+            }
+            
+            botMessage.innerHTML = `<p>${response}</p>`;
+            messages.appendChild(botMessage);
+            messages.scrollTop = messages.scrollHeight;
+        }, 1000);
+
+        document.getElementById('tour-question').value = '';
+    }
+
+    function getRoomSize(roomType) {
+        const sizes = {
+            deluxe: '350',
+            executive: '500',
+            presidential: '800'
+        };
+        return sizes[roomType];
+    }
+    function getAmenityIcon(amenity) {
+        const icons = {
+            'TV': 'tv',
+            'bed': 'bed',
+            'bar': 'wine-glass-alt',
+            'WiFi': 'wifi',
+            'toiletries': 'soap',
+            'service': 'concierge-bell',
+            'balcony': 'door-open',
+            'Jacuzzi': 'hot-tub'
+        };
+        
+        for (const [key, icon] of Object.entries(icons)) {
+            if (amenity.toLowerCase().includes(key.toLowerCase())) {
+                return icon;
+            }
+        }
+        return 'check-circle';
+    }
+    
+
+    function getRoomPrice(roomType) {
+        const prices = {
+            deluxe: '5000',
+            executive: '8000',
+            presidential: '12000'
+        };
+        return prices[roomType];
+    }
+    document.getElementById('room-selector').addEventListener('change', (e) => {
+        loadRoomTour(e.target.value);
+    });
+    // Initialize the tour on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadRoomTour('deluxe');
+});
     });
 });
