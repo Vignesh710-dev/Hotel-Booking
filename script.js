@@ -1,3 +1,4 @@
+
 // Room data
 const rooms = [
     {
@@ -223,13 +224,13 @@ if (quickSearchBtn) {
 }
 
 // Confirm booking
-function confirmBooking(event, roomId) {
+async function confirmBooking(event, roomId) {
     event.preventDefault();
     const room = rooms.find(r => r.id === roomId);
     const form = event.target;
     
     const bookingDetails = {
-        room: room.name,
+        roomName: room.name,
         checkIn: form.checkin.value,
         checkOut: form.checkout.value,
         guests: form.guests.value,
@@ -240,7 +241,51 @@ function confirmBooking(event, roomId) {
         confirmationNumber: Math.floor(Math.random() * 1000000)
     };
     
-    displayConfirmation(bookingDetails);
+    try {
+        const emailSent = await sendBookingEmail(bookingDetails);
+        if (emailSent) {
+            displayConfirmation(bookingDetails);
+            Swal.fire('Success!', 'Booking confirmed and email sent!', 'success');
+        } else {
+            displayConfirmation(bookingDetails);
+            Swal.fire('Info', 'Booking confirmed but email failed to send', 'info');
+        }
+    } catch (error) {
+        console.error('Booking error:', error);
+        Swal.fire('Error', 'Failed to process booking', 'error');
+    }
+}
+
+async function sendBookingEmail(bookingData) {
+    try {
+        const response = await fetch('https://formspree.io/f/xovdzwqr', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                _replyto: bookingData.email,
+                _subject: `New Booking: ${bookingData.roomName}`,
+                name: bookingData.name,
+                email: bookingData.email,
+                phone: bookingData.phone,
+                room: bookingData.roomName,
+                checkin: bookingData.checkIn,
+                checkout: bookingData.checkOut,
+                guests: bookingData.guests,
+                message: `New booking received for ${bookingData.roomName}`
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to send email');
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Email sending error:', error);
+        return false;
+    }
 }
 
 // Calculate total price
@@ -946,14 +991,41 @@ document.getElementById('booking-form').addEventListener('submit', function(e) {
 });
 
 // For contact form
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    Swal.fire({
-        title: 'Message Sent!',
-        text: 'We will get back to you soon',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    });
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+     e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    
+    try {
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        // Submit to Formspree
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            Swal.fire('Success!', 'Your message has been sent!', 'success');
+            form.reset();
+        } else {
+            throw new Error('Failed to send message');
+        }
+    } catch (error) {
+        console.error('Form submission error:', error);
+        Swal.fire('Error', 'Failed to send message. Please try again.', 'error');
+    } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+    }
 });
 
 // For error cases
@@ -1159,3 +1231,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
     });
 });
+
+// Add this to your script.js file
+function autoScrollTestimonials() {
+    const container = document.getElementById('testimonials-scroll');
+    let scrollAmount = 0;
+    
+    setInterval(() => {
+        scrollAmount += 320; // Adjust based on card width + gap
+        if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+            scrollAmount = 0;
+        }
+        container.scrollTo({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    }, 3000); // Adjust timing (in milliseconds) as needed
+}
+
+// Call this function when DOM is loaded
+document.addEventListener('DOMContentLoaded', autoScrollTestimonials);
